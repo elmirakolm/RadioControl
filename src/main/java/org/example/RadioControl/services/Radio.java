@@ -1,11 +1,16 @@
 
 package org.example.RadioControl.services;
 
-public class VolumeControl {
+public class Radio {
     public int currentVolume;
+    public int currentStation;
 
     public int getCurrentVolume() {
         return currentVolume;
+    }
+
+    public int getCurrentStation() {
+        return currentStation;
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
@@ -16,8 +21,20 @@ public class VolumeControl {
         currentVolume = newCurrentVolume;
     }
 
+    public void setCurrentStation(int newCurrentStation) {
+        if (newCurrentStation < 0) {
+            return;
+        }
+
+        currentStation = newCurrentStation;
+    }
+
     public void setToMaxVolume() {
         currentVolume = 100;
+    }
+
+    public void setToMaxStation() {
+        currentStation = 9;
     }
 
     public void increaseVolume() {
@@ -25,6 +42,14 @@ public class VolumeControl {
             currentVolume = currentVolume + 1;
             if (currentVolume == 100)
                 return;
+        }
+    }
+
+    public void next() {
+        if (currentStation == 9) {
+            currentStation = 0;
+        } else {
+            currentStation++;
         }
     }
 
@@ -36,4 +61,13 @@ public class VolumeControl {
                 return;
         }
     }
+
+    public void prev() {
+        if (currentStation == 0) {
+            currentStation = 9;
+        } else {
+            currentStation--;
+        }
+    }
+
 }
