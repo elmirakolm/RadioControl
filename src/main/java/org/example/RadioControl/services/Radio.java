@@ -2,8 +2,8 @@
 package org.example.RadioControl.services;
 
 public class Radio {
-    public int currentVolume;
-    public int currentStation;
+    private int currentVolume;
+    private int currentStation;
 
     public int getCurrentVolume() {
         return currentVolume;
@@ -17,7 +17,10 @@ public class Radio {
         if (newCurrentVolume < 0) {
             return;
         }
-
+        if (newCurrentVolume > 100) {
+            currentVolume = 100;
+            return;
+        }
         currentVolume = newCurrentVolume;
     }
 
@@ -25,7 +28,10 @@ public class Radio {
         if (newCurrentStation < 0) {
             return;
         }
-
+        if (newCurrentStation > 9) {
+            currentStation = 0;
+            return;
+        }
         currentStation = newCurrentStation;
     }
 
@@ -37,6 +43,7 @@ public class Radio {
         currentStation = 9;
     }
 
+
     public void increaseVolume() {
         if (currentVolume < 100) {
             currentVolume = currentVolume + 1;
@@ -44,16 +51,6 @@ public class Radio {
                 return;
         }
     }
-
-    public void next() {
-        if (currentStation == 9) {
-            currentStation = 0;
-        } else {
-            currentStation++;
-        }
-    }
-
-
     public void decreaseVolume() {
         if (currentVolume > 0) {
             currentVolume = currentVolume - 1;
@@ -61,7 +58,13 @@ public class Radio {
                 return;
         }
     }
-
+    public void next() {
+        if (currentStation == 9) {
+            currentStation = 0;
+        } else {
+            currentStation++;
+        }
+    }
     public void prev() {
         if (currentStation == 0) {
             currentStation = 9;
