@@ -17,6 +17,7 @@ public class RadioTest {
 
 
     }
+
     @Test
     public void shouldSetStation() {
         Radio radio = new Radio();
@@ -59,6 +60,7 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void increaseVolumeNegativeVolume() {
         Radio radio = new Radio();
@@ -92,6 +94,7 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void increaseVolumeFromOne() {
         Radio radio = new Radio();
@@ -188,6 +191,7 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void negativeStation() {
         Radio radio = new Radio();
@@ -198,16 +202,65 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void aboveThanMaxStation() {
         Radio radio = new Radio();
         radio.setCurrentStation(10);
 
         int expected = 0;
-        int actual = radio.getCurrentVolume();
+        int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void aboveThanConstructor_MaxStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(21);
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void prevConstructorStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(20);
+        radio.prev();
+
+        int expected = 19;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void nextConstructorStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(1);
+        radio.next();
+
+        int expected = 2;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void PrevFromZeroConstructorStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(0);
+        radio.prev();
+
+        int expected = 19;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
     @Test
     public void stationsCount() {
         Radio radio = new Radio(20);
@@ -218,4 +271,7 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+
 }
+
